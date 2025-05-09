@@ -1,0 +1,68 @@
+.profile-container {
+    /* margin: 50px auto !important;  */
+    max-width: 500px;
+    margin: 140px auto 140px auto;
+    /* margin: auto; */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px #0000001a;
+}
+
+.profile-info p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.profile-info input {
+    flex: 1;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+/* button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+button i{
+    font-size: 14px;
+} */
+
+.save-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.85em;
+    margin-left: 10px;
+    display: block;
+}
+#logout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 20px auto;
+    background-color: red;
+    width: 200px;
+    padding: 3px;
+    color:white;
+    font-size: 30px;
+}

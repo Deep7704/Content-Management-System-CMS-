@@ -1,0 +1,552 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body{
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6,
+button, input, textarea {
+  font-family: inherit;
+}
+
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  /* margin-top: 0px; same as navbar height */
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+
+.banner-image-container {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* or 80vh depending on your layout */
+  overflow: hidden;
+}
+.slider-container,
+.banner-image-container {
+  position: relative;
+  width: 100%;
+  /* height: calc(100vh + 80px); Subtract the navbar height */
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+  /* margin-top: 80px; Push the section down below the navbar */
+}
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* Fill the entire container */
+  object-position: center;     /* Keep center part in view */
+  animation: slideInFromLeft 0.3s ease-in-out both;
+}
+
+/* Center the text perfectly no matter the image size */
+.image-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;     /* vertical center */
+  justify-content: center; /* horizontal center */
+  z-index: 2;
+  padding: 20px;
+  text-align: center;
+  pointer-events: none; /* Prevent click through text */
+}
+
+.image-content * {
+  pointer-events: auto; /* Allow interaction inside the block (textarea/buttons) */
+}
+
+.banner-content {
+  font-size: clamp(24px, 4vw, 48px);
+  font-weight: bold;
+  line-height: 1.4;
+  word-break: break-word;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 80px;
+  resize: vertical;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.edit-image-btn {
+  position: absolute;
+  left: 20px;
+  /* top: 10px; */
+  bottom: 70px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.edit-image-btn:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+/* Animation: slide in image from left */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Animation class for image sliding */
+.banner-image {
+  animation: slideInFromLeft 0.5s ease-out;
+}
+
+/* Ensure smooth continuous effect */
+.slider-container {
+  overflow: hidden;
+}
+
+.upload-container .close-btn {
+  position: absolute;
+  top: 5px; 
+  left: 125px; /* Position it at the right edge */
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: #888;
+  cursor: pointer;
+  z-index: 10000; /* Ensure it stays on top of other elements */
+}
+
+.upload-container .close-btn:hover {
+  color: black;
+}
+
+/* Rest of the CSS remains unchanged */
+.upload-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.upload-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.upload-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.upload-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+.welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+.welcome-text {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #3498db;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+  }
+  to {
+    text-shadow: 3px 3px 20px rgba(52, 152, 219, 0.8);
+  }
+}
+
+.show-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+.design-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.design-container {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  gap: 50px; /* Space between image and text */
+}
+
+.design-image img {
+  width: 100%;
+  max-width: 500px; /* Adjust image size */
+  border-radius: 10px;
+}
+
+.design-content {
+  flex: 1;
+  text-align: left; /* Align text to the left */
+}
+
+.design-title {
+  font-size: 54px;
+  color: rgb(66, 62, 62);
+}
+
+.design-description {
+  font-size: 24px;
+  color: rgb(66, 62, 62);
+}
+
+/* Enlarged Input Fields */
+.design-heading-input, .design-text-input {
+  width: 100%;
+  border: 2px  blue;
+  padding: 5px;
+  font-size: 24px; /* Increased font size */
+  max-width: 600px; /* Larger field size */
+}
+
+.scrolling-container {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  /* background: #f8f8f8; */
+margin-top: 150px;
+margin-bottom: 150px;
+overflow-x: clip;
+}
+
+.scrolling-images {
+  display: flex;
+  gap: 15px;
+  animation: scrollImages 25s linear infinite;
+}
+
+.scrolling-image {
+  width: 300px; /* Adjust size as needed */
+  height: 300px;
+  border-radius: 8px;
+}
+
+@keyframes scrollImages {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+
+.hero-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: auto;
+  margin: auto;
+  /* margin-top: 150px; */
+  padding: 60px 20px;
+  /* font-family: "Inter", sans-serif;/ */
+  padding-left: 50px;
+}
+
+.hero-content {
+  max-width: 45%;
+}
+
+.hero-title {
+  font-size: 36px;
+  font-weight: 600;
+  color: rgb(66, 62, 62);
+  margin-bottom: 15px;
+}
+
+.hero-description {
+  font-size:18px;
+  color: rgb(66, 62, 62);
+  margin-bottom: 25px;
+}
+
+.hero-form {
+  display: flex;
+  gap: 10px;
+}
+
+.hero-button {
+  padding: 12px 20px;
+  background-color: #4266ff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.hero-button:hover {
+  background-color: #2d4dcc;
+}
+
+.hero-image {
+  position: relative;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f0f3ff 10%, transparent 80%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-icon {
+  background: linear-gradient(45deg, #4266ff, #7a9eff);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.top-left {
+  top: 20px;
+  left: -40px;
+}
+
+.top-right {
+  top: 0;
+  right: -40px;
+}
+
+.bottom {
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.static-container {
+  /* margin-top: 100px; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px;
+  position: relative;
+  gap: 20px;
+}
+
+/* ✅ Restrict text content width to 40% */
+.static-content {
+  flex: 1;
+  max-width: 50%;
+  word-wrap: break-word;
+  overflow-wrap: break-word; 
+}
+
+.static-content h2 {
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  max-width: 100%; /* ✅ Prevent overflow */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  color: rgb(66, 62, 62);
+}
+
+/* ✅ Ensure paragraph text wraps */
+.static-content p {
+  font-size: 24px;
+  color: rgb(66, 62, 62);
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ✅ Ensure inputs also don't overflow */
+.static-content input {
+  width: 100%;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ✅ Keep images in position */
+.image-container {
+  flex: 1;
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.right-image {
+  width: 50%;
+  height: 600px;
+  position: relative;
+}
+
+.left-image {
+  width: 35%;
+  height: 400px;
+  position: absolute;
+  left: 18%;
+  bottom: 120px;
+  z-index: 2;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 30px;
+}
+
+.static-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+.large {
+  z-index: 1;
+}
+
+.small {
+  z-index: 2;
+}
+
+.trusted-companies {
+  text-align: center;
+  padding: 50px 20px;
+
+  h2 {
+    font-size: 34px;
+    font-weight: bold;
+    color: rgb(66, 62, 62);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.4;
+  }
+
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin: 30px 0;
+
+    .logo {
+      font-size: 22px;
+      font-style: italic;
+      font-weight: 500;
+      color: rgb(66, 62, 62);
+
+      &.bold {
+        font-weight: 800;
+        font-size: 24px;
+      }
+    }
+  }
+
+  .customer-stories {
+    font-size: 16px;
+    font-weight: 500;
+    color: #0d0d2b;
+    cursor: pointer;
+  }
+}
+
+.edit-btn {
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.edit-btn:hover {
+  background-color: #e0a800;
+}

@@ -1,0 +1,248 @@
+<!-- Navigation bar with gallery link
+ 
+<nav class="navbar" *ngIf="showNavbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">CMS</a>
+    <ul class="nav-links">
+      <li><a href="/home">Home</a></li>
+      <li><a href="/About">About Us</a></li>
+      <li class="dropdown">
+        <a href="/Gallery">Gallery</a>
+        <ul class="dropdown-content">
+          <li><a href="#" (click)="toggleUploadForm($event)">Upload Image</a></li>
+        </ul>
+      </li>
+      <li><a href="/Career">Career</a></li>
+      <li><a href="/Contact">Contact Us</a></li>
+      <li>
+        <a href="/backend">
+          <ion-icon name="person-circle-sharp" style="font-size: 40px; color: white;"></ion-icon>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav> -->
+
+<!-- Upload Image Form -->
+<!-- Upload Image Form -->
+<div *ngIf="showUploadForm" class="upload-container">
+  <button class="close-btn" (click)="toggleUploadForm($event)">×</button> <!-- Close button -->
+  <h3>Upload Image</h3>
+  <form (ngSubmit)="uploadImage()">
+    <label for="imageName">Image Name</label>
+    <input type="text" id="imageName" [(ngModel)]="newImage.name" name="name" required>
+
+    <!-- <label for="imageUrl">URL</label>
+    <input type="url" id="imageUrl" [(ngModel)]="newImage.url" name="url" required> -->
+
+    <label for="imageFile">Select Image</label>
+    <input type="file" id="imageFile" (change)="onImageFileChange($event)" required>
+
+    <button type="submit">Upload Image</button>
+  </form>
+</div>
+
+<div class="image-container">
+  <div class="bgimg" *ngIf="showbgimg" [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')'}"></div>
+</div>
+
+
+<div class="welcome-container" data-aos>
+  <h1 class="welcome-text"  data-aos="fade-up">Gallery Section </h1>
+</div>
+
+
+<!-- Gallery Display -->
+<div class="gallery-container" data-aos="fade-up">
+  <div class="gallery-item" *ngFor="let item of galleryItems">
+    <img [src]="item.image" [alt]="item.name" class="gallery-image" />
+    <div class="gallery-overlay">
+      <button class="delete-btn" *ngIf="isadmin || iseditor" (click)="deleteImage(item.id)">Delete Image</button>
+      <button class="edit-btn" *ngIf="isadmin || iseditor" (click)="editImage(item)">Edit Image</button>
+    </div>
+  </div>
+</div>
+
+<div class="add-item-container">
+  <button class="add-item-btn" *ngIf="currentRoute === 'http://localhost:4200/backend/admin'" (click)="toggleUploadForm($event)">Add Item</button>
+</div>
+
+
+<div *ngIf="showUpdateForm" class="upload-container">
+  <button class="close-btn" (click)="toggleUpdateForm($event)">×</button> <!-- Close button -->
+  <h3>Upload Image</h3>
+  <form (ngSubmit)="updateImage()">
+    
+    <label for="itemId">Image Id</label>
+    <input type="number" id="itemId" [(ngModel)]="newImage.Item_id" name="itemid" readonly required>
+    
+    <label for="userId">User Id</label>
+    <input type="number" id="userId" [(ngModel)]="newImage.UserId" name="userid" required>
+
+    <label for="imageFile">Select Image</label>
+    <input type="file" id="imageFile" (change)="onImageFileChange($event)" required>
+
+    <button type="submit">Upload Image</button>
+  </form>
+</div>
+
+<div class="gallery-hero" data-aos="fade-right">
+  <div class="hero-text">
+    <h2
+    id="hero-text"
+    class="herotext"
+    *ngIf="!isEditingHeading"
+    (click)="editField('Heading')">
+    {{ heading }}
+  </h2>
+  
+  <input
+  #headingInput
+    *ngIf="isEditingHeading"
+    class="heading-input"
+    [(ngModel)]="heading"
+    (blur)="updateContent(12,8)"
+  />
+  
+  <p
+  id="hero-subtext"
+  class="hero-subtext"
+  *ngIf="!isEditingTextcontent"
+  (click)="editField('Textcontent')"
+>
+  {{ textcontent }}
+</p>
+  <ngx-monaco-editor
+  *ngIf="isEditingTextcontent"
+  class="text-input"
+  [options]="editorOptions"
+  [(ngModel)]="textcontent"
+  (blur)="updateContent(12,8)"
+  style="height: 60px; border: 2px solid blue; font-size: 20px;"
+></ngx-monaco-editor>
+  </div>
+
+<div class="galleryimage">
+  <img [src]="imageurl" 
+  class="main-image" 
+  alt="People">
+  <button (click)="toggleupdateForm()"  *ngIf="isadmin || iseditor"  class="edit-btn" >Update Image</button>
+</div>
+</div>
+
+
+<div *ngIf="showupdateform" class="upload-container" >
+  <button class="close-btn" (click)="toggleupdateForm()">×</button>
+  <h3>Upadte Background Image</h3>
+  <form (ngSubmit)="updateimages()">
+    
+    <label for="itemId">Image ID</label>
+    <input type="number" id="itemId" [(ngModel)]="newimage.item_id" name="itemid" readonly required>
+    
+    <label for="userId">User ID</label>
+    <input type="number" id="userId" [(ngModel)]="newimage.userId" name="userid" readonly required>
+
+    <label for="pagename">Page Name</label>
+    <input type="text" id="pagename" [(ngModel)]="newimage.pagename" name="pagename" readonly required>
+
+    <label for="imageFile">Select Image</label>
+    <input type="file" id="imageFile" (change)="onimageFileChange($event)" required>
+
+    <button type="submit">Update Image</button>
+  </form>
+</div>
+
+<div class="video-section"  data-aos="fade-right">
+        
+  <div class="video-part">
+    <video controls [src]="videourl"
+    type = "video/mp4"
+      class="main-image" 
+      alt="People">
+    
+    </video> 
+      <button (click)="toggleupdateForm()"  *ngIf="isadmin || iseditor"  class="edit-btn" >Update Image</button>
+  </div>
+
+  <!-- <div class="video-part">
+ <video controls>
+  <source src="assets/images/video.mp4" type="video/mp4">ng serve --open
+          Your browser does not support the video tag.</video>
+  </div> -->
+
+  <div class="text-section">
+  <div class="anotherheading">
+ 
+    <h2
+    id="anotherhero-text"
+    class="anotherherotext"
+    *ngIf="!isEditinganotherHeading"
+    (click)="editField('anotherHeading')">
+    {{ anotherheading }}
+  </h2>
+  
+  <input
+  #anotherheadingInput
+    *ngIf="isEditinganotherHeading"
+    class="anotherheading-input"
+    [(ngModel)]="anotherheading"
+    (blur)="updateContent(13,8)"
+  />
+
+  <p
+  id="anothersub-text"
+  class="anothersubtext"
+  *ngIf="!isEditinganotherTextcontent"
+  (click)="editField('anotherTextcontent')">
+  {{ anothertextcontent }}
+</p>
+
+<input
+#anothertextcontentInput
+  *ngIf="isEditinganotherTextcontent"
+  class="anothertextcontent-input"
+  [(ngModel)]="anothertextcontent"
+  (blur)="updateContent(13,8)"
+/>
+  </div>
+</div>
+</div>
+<!-- <footer class="footer">
+  <div class="footer-container">
+    <div class="footer-left">
+      <h2 class="footer-title">Content Management System</h2>
+      <nav class="footer-links">
+        <a href="#">Home</a> |
+        <a href="#">About</a> |
+        <a href="#">Gallery</a> |
+        <a href="#">Careers</a> |
+        <a href="#">Contact Us</a>
+      </nav>
+    </div>
+
+    <div class="footer-right">
+      <span class="footer-email">Email📧  <strong>cms&#64;software.com</strong></span>
+
+      <div class="footer-follow-section">
+        <span class="footer-follow">Follow On  </span>
+        <div class="footer-icons">
+          <a href="#"> <ion-icon class="social-icon" name="logo-twitter"></ion-icon></a>
+          <a href="#"> <ion-icon class="social-icon" name="logo-facebook"></ion-icon></a>
+          <a href="#"> <ion-icon class="social-icon" name="logo-instagram"></ion-icon></a>
+          <a href="#"> <ion-icon class="social-icon" name="logo-linkedin"></ion-icon></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="footer-divider">
+
+  <div class="footer-bottom">
+    <p>
+      Copyright © 2025 by Trusted company, India | 
+      <a href="#">Legal</a> | 
+      <a href="#">Privacy</a> | 
+      <a href="#">Website Terms of Use</a>
+    </p>
+  </div>
+</footer> -->

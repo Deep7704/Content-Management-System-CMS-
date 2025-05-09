@@ -1,0 +1,366 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap");
+
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  line-height: 1.6;
+  color: #333; /* Default text color */
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures full viewport height */
+}
+
+/* ==================== Navbar Styles ==================== */
+.navbar {
+  padding: 15px 20px;
+  position: relative;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  background: transparent;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 80px;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.navbar.scrolled {
+  background-color: #888;
+}
+.nav-links a.dark-text {
+  color: black;
+}
+.navbar.scrolled {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+.nav-links a.light-text {
+  color: white;
+}
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: auto;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 20px; /* Container Padding */
+}
+
+.navbar-logo {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+.navbar-brand {
+  margin-left: 0;
+  text-decoration: none;
+}
+
+/* ==================== Navigation Links (Desktop) ==================== */
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 25px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  transition: 0.3s;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  opacity: 0.7;
+}
+
+.user-icon-container {
+  margin-left: 25px;
+}
+
+.user-icon {
+  font-size: 44px;
+  color: black;
+  height: 30px;
+  width: auto;
+  cursor: pointer;
+  position: relative;
+}
+
+.user-icon:hover::after {
+  content: "Admin Login";
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: black;
+  padding: 5px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* ==================== Toggle Button (Mobile) ==================== */
+.menu-icon {
+  display: none; /* Hidden on desktop */
+  background: none;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.menu-icon:focus {
+  outline: none;
+}
+
+/* ==================== Main Content ==================== */
+.main-content {
+  flex: 1; /* Occupies remaining space */
+}
+
+/* ==================== Footer Styles ==================== */
+.footer {
+  background-color: gray;
+  color: white;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  position: relative;
+  width: auto;
+}
+
+.footer-container {
+  display: flex;
+  padding: 50px;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-left {
+  text-align: left;
+}
+
+.footer-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.footer-links {
+  font-size: 14px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.footer-email {
+  font-size: 14px;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.footer-email input {
+  font-size: 14px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.footer-follow-section {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.footer-follow {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.footer-icons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.footer-icons .social-icon {
+  font-size: 22px;
+  color: white;
+  width: auto;
+  height: 22px;
+}
+
+.footer-icons input {
+  font-size: 14px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 180px;
+}
+
+.footer-divider {
+  width: 100%;
+  margin: 15px 0;
+  border: 0.5px solid #555;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 12px;
+}
+
+.footer-bottom a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* ==================== Media Queries (Mobile) ==================== */
+@media screen and (max-width: 768px) {
+    /* Navbar */
+    .navbar-container {
+        flex-direction: column; /* Stack logo and nav */
+        align-items: flex-start; /* Align to left */
+        padding: 10px;
+    }
+
+    .navbar-logo {
+        margin-bottom: 10px;
+    }
+
+    /* Hide nav links and user icon */
+    .nav-right {
+        display: none; /* Hide by default */
+        width: 100%; /* Take full width */
+    }
+
+    /* Show nav links when menu is open */
+    .nav-right.open {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Stack navigation links */
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .nav-links li {
+        margin-bottom: 5px;
+    }
+
+    .user-icon-container {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    /* Show Toggle Button */
+    .menu-icon {
+        display: block;
+        align-self: flex-end; /* Position to the right */
+        margin-left: auto; /* Push to the right */
+    }
+
+    /* Footer */
+    .footer-container {
+        flex-direction: column; /* Stack sections */
+        align-items: center;
+        padding: 20px;
+    }
+
+    .footer-left,
+    .footer-right {
+        text-align: center;
+        margin-bottom: 20px;
+        width: 100%; /* Full width for each section */
+    }
+
+    .footer-follow-section {
+        align-items: center; /* Center follow section */
+    }
+
+    .footer-icons {
+        justify-content: center; /* Center the icons */
+    }
+
+    .footer-icons input {
+        width: 100%; /* Make input full width */
+        margin-bottom: 5px;
+    }
+
+    .footer-email {
+        justify-content: center; /* Center email content */
+    }
+
+    .navbar-container a{
+      margin-left: 0px;
+    }
+    
+}

@@ -1,0 +1,110 @@
+<nav class="navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">cms</a>
+
+    <!-- Toggle Button (Visible on Mobile) -->
+    <span class="menu-icon" (click)="toggleMenu()">☰</span>
+
+    <!-- Sidebar / Navigation Links (Hidden on Mobile, Shown when "open") -->
+    <div class="nav-links" [class.open]="menuOpen">
+      <ul>
+        <li><a href="/login">Home</a></li>
+        <li><a href="/login">About Us</a></li>
+        <li><a href="/login">Gallery</a></li>
+        <li><a href="/login">Career</a></li>
+        <li><a href="/login">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <div class="banner-container">
+    <div class="content">
+      <img src="assets/images/logo.png" alt="Logo" class="logo"/>
+      <h1>We Have Something Exciting to share  with You...</h1>
+      <button class="cta-button" (click)="navigateToLogin()">Explore Now</button>
+    </div>
+  </div>
+  
+  <div class="textcenter">
+    <h1 class="text">User Management and Workflows </h1>
+    <p >Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, ex nemo quia laborum pariatur vel nisi alias quod sit asperiores unde nobis deleniti voluptate quae assumenda tempore inventore officia facere?Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore atque vitae laborum inventore asperiores illo officia. Molestias eligendi consequuntur id, sint illo ad quos dignissimos porro velit debitis sapiente quia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, aliquam.</p>
+    <img class="img" src="assets/images/product.jpg" alt="no img">
+     </div>
+
+     <!-- content-management.component.html -->
+<section class="content-section">
+  <div class="maincontainer">
+    <!-- Left Side (Text Content) -->
+    <div class="content-left">
+      <span class="tag">MANAGE CONTENT</span>
+      <h2 class="title">
+        Easily update and publish content to <br />
+        reduce dependency on developers
+      </h2>
+      <p class="description">
+        Content teams have the power to visualize and manage content changes, 
+        even if you're running CMS headlessly.
+      </p>
+      <ul class="content-list">
+        <li>✅ Easily manage pages with no-code visual editing tools</li>
+        <li>✅ Structure and reuse content across pages and sites</li>
+        <li>✅ Deliver personalized experiences with dynamic content</li>
+      </ul>
+      <button class="learn-more">Learn More →</button>
+    </div>
+
+    <!-- Right Side (Image) -->
+    <div class="content-right">
+      <img src="assets/images/manage-content.svg" alt="CMS Preview" class="content-image" />
+    </div>
+  </div>
+</section>
+
+<footer class="footer" *ngIf="footerData">
+  <div class="footer-container">
+    <div class="footer-left">
+      <h2 class="footer-title">{{ footerData.websiteTitle }}</h2>
+      <nav class="footer-links">
+        <p>Smooth Control, Unique Content</p>
+      </nav>
+    </div>
+
+    <div class="footer-right">
+      <span class="footer-email"><strong>{{ footerData.email }}</strong></span>
+
+      <div class="footer-follow-section">
+        <!-- <span class="footer-follow">Follow Us</span> -->
+        <div class="footer-icons">
+          <a *ngIf="footerData.socialLinks.Twitter" [href]="footerData.socialLinks.Twitter" target="_blank">
+            <img class="social-icons" src="assets/Icons/twitter-brands.svg" alt="Twitter Logo">
+          </a>
+          <a *ngIf="footerData.socialLinks.Facebook" [href]="footerData.socialLinks.Facebook" target="_blank">
+            <img class="social-icons" src="assets/Icons/facebook-brands.svg" alt="Facebook Logo">
+          </a>
+          <a *ngIf="footerData.socialLinks.Instagram" [href]="footerData.socialLinks.Instagram" target="_blank">
+            <img class="social-icons" src="assets/Icons/instagram-brands.svg" alt="Instagram Logo">
+          </a>
+          <a *ngIf="footerData.socialLinks.Linkedin" [href]="footerData.socialLinks.Linkedin" target="_blank">
+            <img class="social-icons" src="assets/Icons/linkedin-brands.svg" alt="LinkedIn Logo">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+    <hr class="footer-divider">
+
+    <div class="footer-bottom">
+      <p>
+        {{ footerData.copyrightText }} |
+        <a *ngIf="footerData.footerLinks.Legal" [href]="footerData.footerLinks.Legal.Url">
+          {{ footerData.footerLinks.Legal.Text }}
+        </a> | 
+        <a *ngIf="footerData.footerLinks.Privacy" [href]="footerData.footerLinks.Privacy.Url">
+          {{ footerData.footerLinks.Privacy.Text }}
+        </a> | 
+        <a href="#">Website Terms of Use</a>
+      </p>
+    </div>
+  </footer>

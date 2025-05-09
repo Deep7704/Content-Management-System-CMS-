@@ -1,0 +1,131 @@
+<!-- <section>
+  <h2>About Us</h2>
+  <div *ngIf="!isEditing">
+    <p>{{ content || 'Content is loading or unavailable.' }}</p>
+    <button (click)="toggleEdit()">Edit</button>
+  </div>
+
+  <div *ngIf="isEditing">
+    <ngx-monaco-editor [(ngModel)]="content" [options]="editorOptions"></ngx-monaco-editor> 
+    <button (click)="saveContent()">Save</button>
+    <button (click)="toggleEdit()">Cancel</button>
+  </div>
+</section>
+ -->
+ <!-- <img class="bgimg" src="https://www.serole.com/wp-content/uploads/2018/09/About-Us-01-01.jpg" alt="About Us"> -->
+ <div class="image-container">
+  <!-- The background image is applied dynamically to the div using ngStyle -->
+  <div class="bgimg" *ngIf="showbgimg" [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')'}"></div>
+  
+</div>
+
+ <div class="about-container">
+<!-- Editable Heading -->
+<h1 id="aboutHeading"
+    class="about-heading"
+    *ngIf="!isEditingHeading"
+    (click)="editHeadig()">
+  {{ heading }}
+</h1>
+
+<input *ngIf="isEditingHeading"
+       #headingInput
+       [(ngModel)]="heading"
+       type="text"
+       class="heading-input"
+       (blur)="updateAbout()" />
+
+  <p id="aboutText"
+   class="about-text" 
+   *ngIf="!isEditingTextcontent" 
+   (click)="editText()" >
+   {{textcontent}}
+  </p>
+
+   <input *ngIf="isEditingTextcontent"
+    #textInput [(ngModel)]="textcontent"
+     type="text" 
+     (blur)="updateAbout()" > 
+</div>
+  
+
+<!-- <div class="about-container">
+  Editable Heading
+  <h1 id="aboutHeading"
+      class="about-heading"
+      *ngIf="!isEditingHeading"
+      (click)="editHeadig()"
+      style="border-bottom: 2px dotted blue; cursor: pointer;">
+    {{ heading }}
+  </h1>
+  
+  <input *ngIf="isEditingHeading"
+         #headingInput
+         [(ngModel)]="heading"
+         type="text"
+         class="heading-input"
+         (blur)="updateAbout()"
+         style="border: 2px solid blue; padding: 5px; font-size: 24px; width: 100%;" /> -->
+
+<div class="about-section">
+  <!-- About Title -->
+  <h2 id="abouttitle" 
+      class="about-title"
+      *ngIf="!isEditingHeadingTitle"
+      (click) = "editTitleHeading()">
+      {{headingTitle}}
+  </h2>
+  <input *ngIf="isEditingHeadingTitle"
+  #headingTitleInput
+  [(ngModel)] = "headingTitle"
+  type="text"
+  class="headingTitle-input"
+  (blur)="updateAboutTitle()" /> 
+
+  <!-- About Content -->
+  <div class="about-part">
+    <div class="about-txt">
+      <p id="abouttxt"
+   class="about-txt" 
+   *ngIf="!isEditingTextTitle" 
+   (click)="editTextTitle()" >
+   {{texttitle}}
+  </p>
+
+   <input *ngIf="isEditingTextTitle"
+    #textTitleInput [(ngModel)]="texttitle"
+     type="text" 
+     (blur)="updateAboutTitle()" />
+    </div>
+
+    <!-- About Image -->
+    <div class="about-image">
+      <img [src]="imageurl" 
+      class="main-image" 
+      alt="About us" >
+      <button (click)="toggleupdateForm()" *ngIf="isadmin" class="edit-btn" >Update Image</button>
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showUpdateForm" class="upload-container" >
+  <button class="close-btn" (click)="toggleupdateForm()">×</button>
+  <h3>Upadte Image</h3>
+  <form (ngSubmit)="updateimage()">
+    
+    <label for="itemId">Image ID</label>
+    <input type="number" id="itemId" [(ngModel)]="newimage.item_id" name="itemid" readonly required>
+    
+    <label for="userId">User ID</label>
+    <input type="number" id="userId" [(ngModel)]="newimage.userId" name="userid" readonly required>
+
+    <label for="pagename">Page Name</label>
+    <input type="text" id="pagename" [(ngModel)]="newimage.pagename" name="pagename" readonly required>
+
+    <label for="imageFile">Select Image</label>
+    <input type="file" id="imageFile" (change)="onImageFileChange($event)" required>
+
+    <button type="submit">Update Image</button>
+  </form>
+</div>

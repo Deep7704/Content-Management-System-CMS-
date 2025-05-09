@@ -1,0 +1,238 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+:root {
+  --bs-body-bg: transparent !important; /* Or whatever color you want */
+}
+
+.body {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('/assets/images/bgimg.jpg') no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  animation: moveBackground 1.3s ease-out forwards;
+}
+
+/* Background Animation */
+@keyframes moveBackground {
+  0% {
+    background-position: -100vw center;
+  }
+  100% {
+    background-position: 0 center;
+  }
+}
+/* Container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Glassmorphism Effect */
+.login-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 400px;
+  transition: transform 0.3s ease-in-out;
+  height: auto;
+}
+.sign-up-container{
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: auto;
+  transition: transform 0.3s ease-in-out;
+  height: auto;
+}
+
+/* Glassmorphism Effect with Smooth Drop-In Animation */
+.login-container, .sign-up-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 400px;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -500%); /* Start WAY above */
+  animation: dropIn 3s ease-out forwards; /* Smooth transition */
+}
+
+/* Drop-In Animation (Starts Instantly) */
+@keyframes dropIn {
+  0% {
+    transform: translate(-50%, -500%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 0%);
+    opacity: 1;
+  }
+}
+/* Heading */
+h2 {
+  color: black;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Input Fields - Horizontal Line Style */
+input {
+  width: 100%;
+  padding: 8px 0; /* Reduced vertical padding */
+  margin: 12px 0;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3); /* Underline */
+  background: transparent; /* Transparent background */
+  color: black;
+  font-size: 16px;
+  text-align: left; /* Align text to the left */
+  transition: 0.3s;
+  outline: none;
+}
+
+input::placeholder {
+  color: rgba(0, 0, 0, 0.5); /* Darker placeholder color */
+  text-align: left; /*Align placeholder to left*/
+}
+
+input:focus {
+  border-bottom: 1px solid #ff4b5c; /* Highlighted underline on focus */
+  box-shadow: none; /* Remove box-shadow */
+}
+
+/* Submit Button */
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  background: linear-gradient(90deg, #ff416c, #ff4b2b);
+  color: white;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #ff4b2b, #ff416c);
+  transform: scale(1.05);
+}
+
+/* Toggle Links */
+p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: black;
+}
+
+a {
+  color: #ff4b5c;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Error Messages */
+small {
+  display: block;
+  color: #ff4b5c;
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: left; /*align error messages to left */
+}
+
+/* Responsive Design */
+@media (max-width: 450px) {
+  .login-container, .sign-up-container {
+    width: 90%;
+  }
+}
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 40px; /* Extra space for the eye icon */
+}
+
+.password-container i {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #888;
+}
+
+.password-container i:hover {
+  color: #000;
+}
+
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 2px;
+}
+/* .image {
+  position: fixed; Cover the entire screen
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: url('assets/images/bgimg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  z-index: -1;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+} */
+.signup-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.signup-left, .signup-right {
+  width: 45%;
+}
+
+.center-section {
+  text-align: center;
+  margin-top: 20px;
+}
+/* Responsive Design */
+@media (max-width: 450px) {
+  .login-container, .sign-up-container {
+    width: 90%;
+  }
+}

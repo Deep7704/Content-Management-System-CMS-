@@ -1,0 +1,89 @@
+<div class="profile-container" *ngIf="user; else noUser">
+    <h2>Hello, {{ user.username }}</h2>
+    <div class="profile-info">
+        <p><strong>ID:</strong> {{ user.user_Id }}</p>
+
+        <p>
+            <strong>UserName:</strong>
+            <span *ngIf="!editing.username">{{ user.username }}</span>
+            <input *ngIf="editing.username" [(ngModel)]="editableUser.username" type="text" />
+            <button (click)="toggleEdit('username')" title="Edit">
+                <i class="fas fa-edit"></i>
+            </button>
+            <span class="error-message" *ngIf="errors.username">{{ errors.username }}</span>
+        </p>
+
+        <p>
+            <strong>FirstName:</strong>
+            <span *ngIf="!editing.firstname">{{ user.firstname }}</span>
+            <input *ngIf="editing.firstname" [(ngModel)]="editableUser.firstname" type="text" />
+            <button (click)="toggleEdit('firstname')" title="Edit">
+                <i class="fas fa-edit"></i>
+            </button>
+            <span class="error-message" *ngIf="errors.firstname">{{ errors.firstname }}</span>
+        </p>
+
+        <p>
+            <strong>MiddleName:</strong>
+            <span *ngIf="!editing.middlename">{{ user.middlename }}</span>
+            <input *ngIf="editing.middlename" [(ngModel)]="editableUser.middlename" type="text" />
+            <button (click)="toggleEdit('middlename')" title="Edit">
+                <i class="fas fa-edit"></i>
+            </button>
+            <span class="error-message" *ngIf="errors.middlename">{{ errors.middlename }}</span>
+        </p>
+
+        <p>
+            <strong>LastName:</strong>
+            <span *ngIf="!editing.lastname">{{ user.lastname }}</span>
+            <input *ngIf="editing.lastname" [(ngModel)]="editableUser.lastname" type="text" />
+            <button (click)="toggleEdit('lastname')" title="Edit">
+                <i class="fas fa-edit"></i>
+            </button>
+            <span class="error-message" *ngIf="errors.lastname">{{ errors.lastname }}</span>
+        </p>
+
+        <p>
+            <strong>MobileNumber:</strong>
+            <span *ngIf="!editing.mobilenumber">{{ user.mobilenumber }}</span>
+            <input *ngIf="editing.mobilenumber" [(ngModel)]="editableUser.mobilenumber" type="text" />
+            <button (click)="toggleEdit('mobilenumber')" title="Edit">
+                <i class="fas fa-edit"></i>
+            </button>
+            <span class="error-message" *ngIf="errors.mobilenumber">{{ errors.mobilenumber }}</span>
+        </p>
+
+        <p>
+            <strong>Email:</strong>
+            <span *ngIf="!editing.email_id">{{ user.email_id }}</span>
+            <input *ngIf="editing.email_id" [(ngModel)]="editableUser.email_id" type="email" />
+            <button (click)="toggleEdit('email_id')" title="Edit">
+                <i class="fas fa-edit"></i>
+            </button>
+            <span class="error-message" *ngIf="errors.email_id">{{ errors.email_id }}</span>
+        </p>
+        <head>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        </head>
+
+        
+        <p>
+            <strong>Password:</strong>
+            <span *ngIf="!editing.password">
+                <span *ngIf="!showPassword">******</span>
+            </span>
+            <input *ngIf="editing.password" [(ngModel)]="editableUser.password" [type]="showPassword ? 'text' : 'password'" />
+            <button (click)="toggleEdit('password')" title="Edit">
+                <i class="fas fa-edit"></i>
+            </button>
+            <span class="error-message" *ngIf="errors.password">{{ errors.password }}</span>
+        </p>
+        
+        <button class="save-btn" (click)="saveChanges()">Save Changes</button>
+        <button id="logout" (click)="logout()" title="Sign out"><ion-icon class="logout-icon" name="log-out-outline"></ion-icon></button>
+    </div>
+</div>
+
+<ng-template #noUser>
+    <p class="no-user">No user details available. Please log in.</p>
+</ng-template>

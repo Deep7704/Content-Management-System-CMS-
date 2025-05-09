@@ -1,0 +1,107 @@
+<div class="main-container">
+  <!-- Navbar -->
+  <div>
+    <nav class="navbar" *ngIf="shownavbar" [class.scrolled]="isScrolled">
+      <div class="navbar-container">
+        <!-- Logo -->
+        <a class="navbar-brand" routerLink="/intro">
+          <img src="assets/images/logo.png" alt="CMS Logo" class="navbar-logo">
+        </a>
+    
+        <!-- Toggle Button -->
+        <button class="menu-icon" (click)="toggleMenu()">☰</button>
+    
+        <!-- Navigation Links and User Icon (on the right) -->
+        <div class="nav-right" [class.open]="menuOpen">
+          <ul class="nav-links">
+            <li><a href="/home"  [class.dark-text]="!isScrolled" [class.light-text]="isScrolled">Home</a></li>
+            <li><a href="/About"  [class.dark-text]="!isScrolled" [class.light-text]="isScrolled">About Us</a></li>
+            <li><a href="/Gallery"  [class.dark-text]="!isScrolled" [class.light-text]="isScrolled">Gallery</a></li>
+            <li><a href="/Career"  [class.dark-text]="!isScrolled" [class.light-text]="isScrolled">Career</a></li>
+            <li><a href="/Contact"  [class.dark-text]="!isScrolled" [class.light-text]="isScrolled">Contact Us</a></li>
+          </ul>
+          <a (click)="redirectToLogin()" title="Profile" class="user-icon-container">
+           <img class="user-icon" src="assets/Icons/user-solid-black.svg" alt="User Logo">
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>  
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- Footer -->
+<footer class="footer" *ngIf="footerData && showHeaderFooter  && showFooter"> 
+  <div class="footer-container">
+    <div class="footer-left">
+      <h2 class="footer-title">
+        <span *ngIf="!editing">{{ footerData.websiteTitle }}</span>
+        <input *ngIf="editing" type="text" [(ngModel)]="updatedFooter.websiteTitle" placeholder="Enter Website Title">
+      </h2>
+
+      <nav class="footer-links" *ngIf="!editing">
+        <a href="#">Home</a> |
+        <a href="#">About</a> |
+        <a href="#">Gallery</a> |
+        <a href="#">Careers</a> |
+        <a href="#">Contact </a>
+      </nav>
+    </div>
+
+    <div class="footer-right">
+      <span class="footer-email">
+        <strong *ngIf="!editing">{{ footerData.email }}</strong>
+        <input *ngIf="editing" type="email" [(ngModel)]="updatedFooter.email" placeholder="Enter Email">
+      </span>
+
+      <div class="footer-follow-section">
+        <div class="footer-icons">
+          <input *ngIf="editing" type="text" [(ngModel)]="updatedFooter.socialLinks.Twitter" placeholder="Twitter URL">
+          <a *ngIf="!editing && footerData.socialLinks.Twitter" [href]="footerData.socialLinks.Twitter" target="_blank">
+            <img class="social-icon"src="assets/Icons/twitter-brands.svg" alt="Twitter Logo">
+          </a>
+
+          <input *ngIf="editing" type="text" [(ngModel)]="updatedFooter.socialLinks.Facebook" placeholder="Facebook URL">
+          <a *ngIf="!editing && footerData.socialLinks.Facebook" [href]="footerData.socialLinks.Facebook" target="_blank">
+            <img class="social-icon" src="assets/Icons/facebook-brands.svg" alt="Facebook Logo">
+          </a>
+
+          <input *ngIf="editing" type="text" [(ngModel)]="updatedFooter.socialLinks.Instagram" placeholder="Instagram URL">
+          <a *ngIf="!editing && footerData.socialLinks.Instagram" [href]="footerData.socialLinks.Instagram" target="_blank">
+            <img class="social-icon" src="assets/Icons/instagram-brands.svg" alt="Instagram Logo">
+          </a>
+
+          <input *ngIf="editing" type="text" [(ngModel)]="updatedFooter.socialLinks.Linkedin" placeholder="LinkedIn URL">
+          <a *ngIf="!editing && footerData.socialLinks.Linkedin" [href]="footerData.socialLinks.Linkedin" target="_blank">
+            <img class="social-icon" src="assets/Icons/linkedin-brands.svg" alt="LinkedIn Logo">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="footer-divider">
+
+  <div class="footer-bottom">
+    <p>
+      <span *ngIf="!editing">{{ footerData.copyrightText }}</span>
+      <input *ngIf="editing" type="text" [(ngModel)]="updatedFooter.copyrightText" placeholder="Enter Copyright Text"> |
+
+      <a *ngIf="!editing" [href]="footerData.footerLinks.Legal.Url">{{ footerData.footerLinks.Legal.Text }}</a>
+      <input *ngIf="editing" type="text" [(ngModel)]="updatedFooter.footerLinks.Legal.Text" placeholder="Legal Text">
+      <input *ngIf="editing" type="text" [(ngModel)]="updatedFooter.footerLinks.Legal.Url" placeholder="Legal URL"> |
+
+      <a *ngIf="!editing" [href]="footerData.footerLinks.Privacy.Url">{{ footerData.footerLinks.Privacy.Text }}</a>
+      <input *ngIf="editing" type="text" [(ngModel)]="updatedFooter.footerLinks.Privacy.Text" placeholder="Privacy Text">
+      <input *ngIf="editing" type="text" [(ngModel)]="updatedFooter.footerLinks.Privacy.Url" placeholder="Privacy URL"> |
+
+      <!-- <a href="#">Website Terms of Use</a> -->
+    </p>
+  </div>
+
+  <button class="btn" *ngIf="!editing && isfooter" (click)="toggleEdit()">Edit Footer</button>
+  <button class="btn" *ngIf="editing && isfooter" (click)="saveFooter()">Save</button>
+</footer>

@@ -1,0 +1,282 @@
+<!-- Navbar with Menu Icon -->
+<div class="navbar">
+    <span class="menu-icon" (click)="toggleSidebar()">☰</span>
+    <h2>{{ panelTitle }}</h2>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar" [class.open]="isSidebarOpen">
+    <ul>
+        <li (click)="showPage('Admin')"> Dashboard </li>
+        <li (click)="showPage('Home')"> Home </li>
+        <li (click)="showPage('About')"> About </li>
+        <li (click)="showPage('Gallery')"> Gallery </li>
+        <li (click)="showPage('Career')"> Career </li>
+        <li (click)="showPage('Contact')"> Contact </li>
+        <li (click)="showPage('UserManagement')"> User Management </li>
+        <li id="logout" (click)="logout()"><ion-icon class="logout-icon" name="log-out-outline"></ion-icon></li>
+    </ul>
+</div>
+
+
+<!-- Dynamic Content Section -->
+<div class="content" [class.sidebar-open]="isSidebarOpen">
+  <app-home  *ngIf=" selectedPage === 'Home'" [isadmin]="true"  [showNavbar]="false" [isadmin]="true" [title]="title" [description]="description"></app-home>
+  <app-about  *ngIf=" selectedPage === 'About'" [isadmin]="true" [showNavbar]="false"  [showbgimg]="false"></app-about>
+  <app-gallery  *ngIf=" selectedPage === 'Gallery'"  [isadmin]="true"  [showNavbar]="false" [showbgimg]="false"></app-gallery>
+  <app-contact  *ngIf=" selectedPage === 'Contact'" [isadmin]="true" [showNavbar]="false" [showbgimg]="false"></app-contact>
+  <app-career  *ngIf=" selectedPage === 'Career'" [isadmin]="true" [showNavbar]="false" [isadmin]="true"  [showbgimg]="false"></app-career>
+  <app-root *ngIf="['Career', 'Home', 'Contact', 'Gallery', 'About'].includes(selectedPage)" [isfooter]="true" [shownavbar]="false" ></app-root>
+  
+  <div *ngIf="selectedPage === 'Admin'" class="admin-dashboard">
+    <div class="chat-container">
+    <canvas id="userChart"></canvas>
+    </div>
+    <div class="user-stats">
+  <p style="color: green;" *ngIf="selectedPage === 'Admin'">Active Users: {{ activeUsers }}</p>
+  <p style="color: grey;" *ngIf="selectedPage === 'Admin'">InActive Users: {{ InactiveUsers }}</p>
+  <p *ngIf="selectedPage === 'Admin'">Total Users: {{ totalUsers }}</p>
+    </div>
+  </div>
+  <div *ngIf="selectedPage === 'Admin'"  class="heading">
+  <h1 style="text-align: center; justify-content: center;"> Quick Access</h1></div>
+
+
+<!-- Reusable Image Table -->
+<div *ngIf="selectedPage === 'Home' || selectedPage === 'Admin' || selectedPage === 'Gallery'" class="grid-container">
+  <h1>
+      {{ selectedPage === 'Home' 
+          ? 'Image Content' 
+          : selectedPage === 'Gallery' 
+          ? 'Gallery Images' 
+          : selectedPage === 'Admin' 
+          ? 'Background Image Section' 
+          : 'Default Section' }}
+  </h1>
+
+  <table class="image-table">
+      <thead>
+          <tr>
+              <th>Image ID</th>
+              <th>User ID</th>
+              <th>File Name</th>
+              <th *ngIf="selectedPage === 'Admin'">Page Name</th>
+              <th *ngIf="selectedPage === 'Home'">Tagline of Image</th>
+              <th>Action</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let image of selectedPage === 'Home' ? banners : selectedPage === 'Gallery' ? galleryItems : images">
+
+              <td *ngIf="selectedPage==='Home'"> {{ image.item_id }}</td>
+              <td *ngIf="selectedPage==='Admin'|| selectedPage ==='Gallery'"> {{ image.itemId }}</td>
+              <td>{{ image.userId }}</td>
+              <td>{{ image.fileName }}</td>
+              <td *ngIf="selectedPage === 'Admin'">{{ image.pagename }}</td>
+              <td *ngIf="selectedPage === 'Home'">{{ image.textContent }}</td>
+              <td>
+                  <button class="edit-btn" *ngIf="selectedPage==='Home'" (click)="editImage(image)">Edit</button>
+                  <button class="edit-btn" *ngIf="selectedPage==='Admin'" (click)="EditImage(image)">Edit</button>
+                  <button class="edit-btn" *ngIf="selectedPage==='Gallery'" (click)="Editimage(image)">Update</button>
+                  <button class="delete-btn" *ngIf="selectedPage==='Gallery'" (click)="deleteImage(image.itemId)">Delete</button>
+                  <!-- Preview Button -->
+                  <button class="preview-btn" *ngIf="selectedPage==='Admin'" 
+                      (click)="previewImage(image)">
+                      <i class="fas fa-eye"></i> View
+                  </button>
+              </td>
+          </tr>
+          <!-- <tr *ngIf="selectedPage==='Gallery' && currentRoute ==='http://localhost:4200/backend/admin'">
+              <td colspan="6">
+                  <button class="add-btn"  (click)="ToggleUploadForm($event)">Add Item</button>
+              </td>
+          </tr> -->
+      </tbody>
+  </table>
+</div>
+
+<!-- Preview Modal -->
+<div class="modal" *ngIf="showPreview">
+  <div class="modal-content">
+      <span class="close" (click)="closePreview()">&times;</span>
+      <h2>Image Preview</h2>
+      <img [src]="previewImageUrl" alt="Preview Image" />
+  </div>
+</div>
+
+
+
+<!-- home page image -->
+<div *ngIf="showUploadForm" class="upload-container">
+<button class="close-btn" (click)="toggleUploadForm($event)">×</button>
+    <h3>Upload Image</h3>
+    <form (ngSubmit)="selectedPage === 'Home' ? Updateimage() : uploadImage()">
+      <!-- Home Page Fields -->
+      <div *ngIf="selectedPage === 'Home'">
+        <label for="itemId">Image ID</label>
+        <input type="number" id="itemId" [(ngModel)]="newImage.item_id" name="itemid" readonly required>
+
+        <label for="userId">User ID</label>
+        <input type="number" id="userId" [(ngModel)]="newImage.userId" name="userid" readonly required>
+
+        <label for="tagline">Tagline of Image</label>
+        <input type="text" id="tagline" [(ngModel)]="newImage.textContent" name="tagline">
+        
+        <label for="imageFile">Select Image</label>
+        <input type="file" id="imageFile" (change)="onImageFileChange($event)" required>
+  
+      </div>
+
+      <!-- Gallery Page Fields -->
+      <div *ngIf="selectedPage === 'Gallery'" >
+        <label for="imageName">Image Name</label>
+        <input type="text" id="imageName" [(ngModel)]="newImage.name" name="name" required>
+
+        <label for="imageFile">Select Image</label>
+        <input type="file" id="imageFile" (change)="onImageFileChange($event)" required>
+      </div>
+
+      <button type="submit">Upload Image</button>
+    </form>
+</div>
+
+
+<!-- Background image -->
+<div *ngIf="showUpdateForm" class="upload-container" >
+    <button class="close-btn" (click)="toggleUpdateForm()">×</button>
+    <h3>Upadte Background Image</h3>
+    <form (ngSubmit)="uploadimage()">
+      
+      <label for="itemId">Image ID</label>
+      <input type="number" id="itemId" [(ngModel)]="newImage.item_id" name="itemid" readonly required>
+      
+      <label for="userId">User ID</label>
+      <input type="number" id="userId" [(ngModel)]="newImage.userId" name="userid" readonly required>
+
+      <label for="pagename">Page Name</label>
+      <input type="text" id="pagename" [(ngModel)]="newImage.pagename" name="pagename" readonly required>
+
+      <label for="imageFile">Select Image</label>
+      <input type="file" id="imageFile" (change)="onImageFileChange($event)" required>
+
+      <button type="submit">Update Image</button>
+    </form>
+</div>
+
+
+<!-- gallery page gallery section -->
+<div *ngIf="showupdateForm" class="upload-container">
+    <button class="close-btn" (click)="toggleupdateForm($event)">×</button>
+    <h3>Upload Image</h3>
+    <form (ngSubmit)="updateImage()">
+        <label for="itemId">Image ID</label>
+        <input type="number" id="itemId" [(ngModel)]="newImage.item_id" name="item_id" readonly required>
+        
+        <label for="userId">User ID</label>
+        <input type="number" id="userId" [(ngModel)]="newImage.userId" name="userId" required>
+        
+        <label for="fileName">File Name</label>
+        <input type="text" id="fileName" [(ngModel)]="newImage.fileName" name="fileName" readonly required>        
+
+        <label for="imageFile">Select Image</label>
+        <input type="file" id="imageFile" (change)="ONImageFileChange($event)" required>
+
+        <button type="submit">Upload Image</button>
+    </form>
+</div>
+
+
+<div class="resume-title" *ngIf="selectedPage === 'Admin'">
+  <h1>Access Resume</h1>
+</div>
+
+<div class="timeline-container" *ngIf="selectedPage === 'Admin'">
+  <p *ngIf="resumes.length === 0">No resumes available.</p>
+
+  <div class="timeline-grid">
+    <div *ngFor="let resume of resumes.slice(0, visibleCount); let i = index" class="timeline-item">
+      <div class="timeline-date">{{ i + 1 }}. {{ resume.firstName }} {{ resume.lastName }}</div>
+      <div class="timeline-content">
+        <p>Email: {{ resume.emailId }}</p>
+        <p>Phone: {{ resume.mobileNo }}</p>
+        <p>Location: {{ resume.location }}</p>
+        <button (click)="downloadResume(resume.resumeId, resume.fileName)">
+          Download Resume
+        </button> 
+        <button *ngIf="selectedPage === 'Admin'" (click)="deleteResume(resume.resumeId)">Delete Resume</button>   
+      </div>
+    </div>
+  </div>
+
+  <!-- Show Less Button -->
+  <div class="load-more-container" *ngIf="visibleCount > 4">
+    <button (click)="showLess()" class="load-more-btn">Show Less ⬆</button>
+  </div>
+
+  <!-- Load More Button (Appears when only 4 resumes are visible) -->
+  <div class="load-more-container" *ngIf="visibleCount === 4 && resumes.length > 4">
+    <button (click)="loadMore()" class="load-more-btn">Load More ⬇</button>
+  </div>
+</div>
+
+
+  <div class="contact-container" *ngIf="selectedPage === 'Admin'">
+    <h2>Contact Details</h2>
+    <table class="image-table">
+        <thead>
+            <tr>
+                <th>Inquiry Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Message</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let contact of contactSubmissions; index as i">
+              <td>{{contact.inquiry_id}}</td>
+              <td>{{ contact.name }}</td>
+              <td>{{ contact.email }}</td>
+              <td>{{ contact.phone }}</td>
+              <td>{{ contact.message }}</td>
+              <td>
+                  <button (click)="deleteInquiry(contact.inquiry_id)" class="delete-btn">Delete</button>
+              </td>
+          </tr>
+      </tbody>
+    </table>
+</div>  
+
+<!-- User Management Table -->
+<div *ngIf="selectedPage === 'UserManagement'">
+  <h1>User Management</h1>
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Username</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.user_Id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.firstname }}</td>
+        <td>{{ user.lastname }}</td>
+        <td>{{ user.email_id }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button id="btn" *ngIf="user.canEdit" (click)="changeUserRole(user)">Change Role to {{ user.role === 'User' ? 'Editor' : 'User' }}</button>
+          <button id="deletebtn" (click)="deactivateuser(user)" *ngIf="user.canDeactivate" >DeActivate Account</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>

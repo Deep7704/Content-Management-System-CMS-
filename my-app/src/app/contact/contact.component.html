@@ -1,0 +1,147 @@
+<div class="image-container">
+  <!-- The background image is applied dynamically to the div using ngStyle -->
+  <div class="bgimg" *ngIf="showbgimg"
+      [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')'}"></div>
+</div>
+
+<h1> Get In Touch</h1>
+<div class="container">
+    
+  <div class="contact-form">
+      <h2>Contact Us</h2>
+      <!-- Success Message -->
+      <div *ngIf="showSuccess" class="alert alert-success d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+          <use xlink:href="#check-circle-fill"></use>
+        </svg>
+        <div>
+          {{ successMessage }}
+        </div>
+      </div>
+      
+      <!-- Error Message -->
+      <div *ngIf="showError" class="alert alert-danger d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+          <use xlink:href="#exclamation-triangle-fill"></use>
+        </svg>
+        <div>
+          {{ errorMessage }}
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" [(ngModel)]="contactForm.name" required>
+      </div>
+
+      <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" [(ngModel)]="contactForm.email" required>
+      </div>
+
+      <div class="form-group">
+          <label for="phone">Phone:</label>
+          <input type="tel" id="phone" name="phone" [(ngModel)]="contactForm.phone">
+      </div>
+
+      <div class="form-group">
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" [(ngModel)]="contactForm.message" required></textarea>
+      </div>
+      <button type="submit" (click)="onSubmit()">Submit</button>
+  </div>
+  
+  <div class="map-container">
+    <a [href]="mapLink" target="_blank">
+      <img src="assets/images/map.png" alt="Map Location" class="map-image" />
+    </a>
+  
+    <div>
+      <ng-container *ngIf="isEditing; else editButton">
+        <input type="text" [(ngModel)]="newMapLink" placeholder="Enter new map link" class="edit-input" />
+        <button (click)="saveMapLink()">Save</button>
+        <button (click)="cancelEdit()">Cancel</button>
+      </ng-container>
+      <ng-template #editButton>
+        <button *ngIf="isadmin" (click)="editMapLink()">Edit Map</button>
+      </ng-template>
+    </div>
+  </div>
+  
+  
+<!-- <footer class="footer">
+  <div class="footer-container">
+      <div class="footer-left">
+          <h2 *ngIf="!isEditing">{{ footerData.title }}</h2>
+          <input *ngIf="isEditing" [(ngModel)]="footerData.title" type="text" placeholder="Enter title" />
+
+          <p *ngIf="!isEditing">{{ footerData.message }}</p>
+          <textarea *ngIf="isEditing" [(ngModel)]="footerData.message" rows="3"
+              placeholder="Enter message"></textarea>
+      </div>
+
+      <div class="footer-links">
+          <div class="footer-column">
+              <h3>COMPANY</h3>
+              <ul>
+                  <li><a href="#">Features</a></li>
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Privacy Policy</a></li>
+              </ul>
+          </div>
+
+          <div class="footer-column">
+              <h3>PAGES</h3>
+              <ul>
+                  <li>About us</li>
+                  <li>Gallery</li>
+                  <li>Career</li>
+                  <li>Contact us</li>
+              </ul>
+          </div>
+
+          <div class="footer-column">
+              <h3>TEMPLATE</h3>
+              <ul>
+                  <li>Licensing</li>
+                  <li>Style Guide</li>
+                  <li>Change Log</li>
+              </ul>
+          </div>
+      </div>
+  </div>
+
+  <hr />
+
+  <div class="footer-bottom">
+      <p *ngIf="!isEditing">
+          Crafted by <a href="#">{{ footerData.craftedBy }}</a>, Powered by <a href="#">{{ footerData.poweredBy }}</a>
+      </p>
+
+      <div *ngIf="isEditing">
+          <input [(ngModel)]="footerData.craftedBy" type="text" placeholder="Enter Crafted By" />
+          <input [(ngModel)]="footerData.poweredBy" type="text" placeholder="Enter Powered By" />
+      </div>
+
+      <div class="social-icons">
+          <div *ngIf="isEditing">
+              <input [(ngModel)]="footerData.twitterLink" type="text" placeholder="Enter Twitter Link" />
+              <input [(ngModel)]="footerData.facebookLink" type="text" placeholder="Enter Facebook Link" />
+              <input [(ngModel)]="footerData.instagramLink" type="text" placeholder="Enter Instagram Link" />
+              <input [(ngModel)]="footerData.linkedinLink" type="text" placeholder="Enter LinkedIn Link" />
+          </div>
+
+        <a [href]="footerData.twitterLink" target="_blank">  <ion-icon class="social-icon" name="logo-twitter"></ion-icon></a>
+        <a [href]="footerData.facebookLink" target="_blank">  <ion-icon class="social-icon" name="logo-facebook"></ion-icon></a>
+        <a [href]="footerData.instagramLink" target="_blank">  <ion-icon class="social-icon" name="logo-instagram"></ion-icon></a>
+        <a [href]="footerData.linkedinLink" target="_blank">  <ion-icon class="social-icon" name="logo-linkedin"></ion-icon></a>
+      </div>
+
+  </div>
+
+  <div class="footer-buttons">
+      <button *ngIf="!isEditing && editbutton " (click)="enableEditing()">Edit Footer</button>
+      <button *ngIf="isEditing" (click)="saveFooter()">Save</button>
+      <button *ngIf="isEditing" (click)="cancelEditing()">Cancel</button>
+  </div>
+</footer> -->

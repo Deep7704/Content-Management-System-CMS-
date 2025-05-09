@@ -1,0 +1,257 @@
+
+/* Global Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+ 
+  .career-form-container {
+    width: 50%;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background: white;
+    text-align: center;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #2d6e7e;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #1a4d5e;
+  }
+  
+ .bgimg {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    display: flex;
+    align-items: flex-end; 
+    justify-content: center; 
+    padding-bottom: 3%; 
+  }
+
+  /* Career Hero Section */
+.career-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+}
+
+.career-text {
+  width: 50%;
+}
+
+.career-text h1 {
+  font-size: 42px;
+  font-weight: bold;
+  color: rgb(66, 62, 62);
+}
+
+.career-text .highlight {
+  color: blue;
+}
+
+.career-text p {
+  font-size: 16px;
+  color: rgb(66, 62, 62);
+}
+
+.career-buttons {
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-link {
+  color: black;
+  text-decoration: underline;
+  margin-left: 10px;
+  scroll-behavior: smooth;
+}
+
+.career-images {
+  position: relative;
+  width: 50%;
+}
+
+.main-image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.overlay-card {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: white;
+  color: rgb(66, 62, 62);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Career Statistics Section */
+.career-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 100px;
+}
+
+.stat-box {
+  text-align: center;
+  width: 20%;
+}
+
+.stat-box h2 {
+  font-size: 36px;
+  color: blue;
+}
+
+.stat-box p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.stat-box span {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Career Hiring Banner */
+.career-hiring {
+  background: #f7f7f7;
+  color: rgb(66, 62, 62);
+  text-align: center;
+  padding: 30px;
+  margin-top: 50px;
+}
+
+.career-hiring .highlight {
+  color: blue;
+}
+
+.career-hiring p {
+  font-size: 16px;
+  color: rgb(66, 62, 62);
+}
+
+.career-hiring button {
+  margin-top: 10px;
+}
+
+.update-btn:hover {
+  background-color: #0056b3;
+  
+}
+
+/* Close button for the upload form */
+.upload-container .close-btn {
+  position: absolute;
+  top: 5px; 
+  left: 125px; /* Position it at the right edge */
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: #888;
+  cursor: pointer;
+  z-index: 10000; /* Ensure it stays on top of other elements */
+}
+
+.upload-container .close-btn:hover {
+  color: black;
+}
+
+/* Rest of the CSS remains unchanged */
+.upload-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  color: rgb(66, 62, 62);
+  align-items: stretch;
+}
+
+.upload-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: rgb(66, 62, 62);
+}
+
+.upload-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  color: rgb(66, 62, 62);
+}
+
+.upload-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+

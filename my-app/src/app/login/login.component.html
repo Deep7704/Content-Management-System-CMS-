@@ -1,0 +1,83 @@
+<div class="body">
+<div class="container">
+  <!-- Login Form -->
+  <div class="login-container" *ngIf="showLogin">
+    <h2>Login</h2>
+    <form [formGroup]="loginform" (ngSubmit)="loginSubmitted(loginform)">
+      <div>
+        <input id="userid" type="text" formControlName="user_Id" placeholder="UserId"/>
+        <small *ngIf="user_Id.invalid && user_Id.touched">UserId is required.</small>
+      </div>
+
+      <div>
+        <div class="password-container">
+          <input id="login-password" [type]="showLoginPassword ? 'text' : 'password'" formControlName="password" placeholder="Password"/>
+          <i class="fa-solid" [ngClass]="showLoginPassword ? 'fa-eye' : 'fa-eye-slash'" (click)="togglepassword('login')"></i>
+        </div>
+        <small *ngIf="password.invalid && password.touched" class="error-text">Password must be at least 8 characters.</small>
+  
+      </div>
+      <div *ngIf="welcomeMessage" class="welcome-message">
+        {{ welcomeMessage }}
+      </div>
+      
+      <p> Want to explore more features? <a (click)="toggleForm($event)" style="cursor: pointer;">Sign Up Now</a></p>
+      <small *ngIf="errorMessage" class="error-message">{{ errorMessage }}</small>
+      <button type="submit" [disabled]="loginform.invalid">Login</button>
+      
+    </form>
+  </div>
+
+  <!-- Signup Form -->
+  <div class="sign-up-container" *ngIf="showsignup">
+    <h2>Sign Up</h2>
+    <form [formGroup]="signupform" (ngSubmit)="signupSubmitted()">
+      
+      <div class="signup-grid">
+        <!-- Left Column -->
+        <div class="signup-left">
+          <input type="text" formControlName="firstname" placeholder="First Name" />
+          <small *ngIf="firstname.invalid && firstname.touched">
+            First name must contain at least two letters and no special characters.
+          </small>
+  
+          <input type="text" formControlName="middlename" placeholder="Middle Name" />
+          <small *ngIf="middlename.invalid && middlename.touched">
+            Middle name must only contain letters.
+          </small>
+  
+          <input type="text" formControlName="lastname" placeholder="Last Name" />
+          <small *ngIf="lastname.invalid && lastname.touched">
+            Last name must contain at least two letters and no special characters.
+          </small>
+        </div>
+  
+        <!-- Right Column -->
+        <div class="signup-right">
+          <input type="text" formControlName="mobilenumber" placeholder="Mobile Number" />
+          <small *ngIf="mobilenumber.invalid && mobilenumber.touched">
+            Enter a valid mobile number (e.g., +911234567890).
+          </small>
+  
+          <input type="email" formControlName="email_id" placeholder="Email" />
+          <small *ngIf="email_id.invalid && email_id.touched">
+            Enter a valid email address.
+          </small>
+  
+          <input type="text" formControlName="username" placeholder="Username" />
+          <small *ngIf="username.invalid && username.touched">
+            Username is required.
+          </small>
+        </div>
+      </div>
+  
+      <!-- Center Section -->
+      <div class="center-section">
+        <p>Already registered? <a (click)="toggleForm($event)" style="cursor: pointer;">Login</a></p>
+        <button type="submit" [disabled]="signupform.invalid">Explore Now !!!</button>
+      </div>
+  
+    </form>
+  </div>
+  
+</div>  </div>

@@ -1,0 +1,542 @@
+/* Navbar Styles */
+/* Global Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+/* Navbar Styles */
+.navbar {
+  padding: 15px 20px;
+  position: relative;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end; /* Move content to the right */
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Ensure the brand stays on the left */
+.navbar-brand {
+  margin-right: auto; /* Push everything else to the right */
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* Adjust spacing */
+  list-style: none;
+  margin-right: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  transition: 0.3s;
+  padding: 10px;
+}
+
+.nav-links a:hover {
+  opacity: 0.7;
+}
+
+/* Icon Styling */
+.nav-links ion-icon {
+  font-size: 50px; /* Increase icon size */
+  color: white;
+  cursor: pointer;
+}
+
+/* Close button for the upload form */
+.upload-container .close-btn {
+  position: absolute;
+  top: 5px; 
+  left: 125px; /* Position it at the right edge */
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: #888;
+  cursor: pointer;
+  z-index: 10000; /* Ensure it stays on top of other elements */
+}
+
+.upload-container .close-btn:hover {
+  color: black;
+}
+
+/* Rest of the CSS remains unchanged */
+.upload-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  color: rgb(66, 62, 62);
+  align-items: stretch;
+}
+
+.upload-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: rgb(66, 62, 62);
+}
+
+.upload-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  color: rgb(66, 62, 62);
+}
+
+.upload-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  left: 0; /* Aligns dropdown to the left */
+  top: 100%; /* Places dropdown right below the icon */
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #575757;
+}
+
+.edit-btn {
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.edit-btn:hover {
+  background-color: #e0a800;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+  
+.bgimg {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  display: flex;
+  align-items: flex-end; 
+  justify-content: center; 
+  padding-bottom: 3%; 
+}
+
+
+.edit-image-btn {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-image-btn:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Overlay Effects */
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+.gallery-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+zoom: normal;
+}
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+  gap: 15px; /* Space between images */
+  padding: 20px;
+  justify-content: center;
+  
+}
+
+.gallery-item {
+  position: relative;
+  width: 100%; /* Ensure full width */
+}
+
+.gallery-image {
+  width: 100%;
+  object-fit: cover; /* Ensures image fills the space */
+  height: 350px;
+  border-radius: 10px;
+}
+
+/* Remove all transformations and animations */
+.gallery-item:hover .gallery-image {
+  transform: none;
+  cursor: pointer;
+  zoom: 1;
+}
+
+.welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40vh; 
+  text-align: center;
+}
+
+.welcome-text {
+  font-size: 4rem;
+  font-weight: bold;
+  color: red; /* Change to your preferred color */
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Remove all animations and transitions */
+.show-text {
+  opacity: 1;
+}
+
+.video-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: #d0a589; Light brown */
+  padding: 80px;
+  color: rgb(66, 62, 62);
+}
+
+.video-part {
+  width: 50%;
+}
+
+.video-part video {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.text-section {
+  width: 50%;
+  padding-left: 50px;
+  background-color: #fff; /* White background */
+  padding: 60px;
+  border-radius: 8px;
+}
+
+.text-section h2 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  color: rgb(66, 62, 62);
+}
+
+.text-section h1 {
+  font-size: 36px;
+  margin: 15px 0;
+  font-weight: bold;
+  color: rgb(66, 62, 62);
+}
+
+.text-section p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: rgb(66, 62, 62);
+}
+
+/* WhatsApp Icon */
+.whatsapp-icon {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #25d366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.whatsapp-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+      flex-direction: column;
+      padding: 20px;
+  }
+
+  .video-section {
+      width: 100%;
+      margin-bottom: 20px;
+  }
+
+  .text-section {
+      width: 100%;
+      padding: 30px;
+      text-align: center;
+  }
+}
+.footer {
+  background-color: gray;
+  color: white;
+  padding: 20px;
+  height: 300px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  padding: 50px;
+  justify-content: space-between; /* Left and right alignment */
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-left {
+  text-align: left;
+}
+
+.footer-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.footer-links {
+  font-size: 14px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-right {
+  text-align: right;
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: flex-end; /* Align everything to the right */
+}
+
+.footer-email {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.footer-follow-section {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.footer-follow {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  margin-right: 125px;
+}
+
+.footer-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-icons .social-icon {
+  font-size: 22px;
+  color: white;
+}
+
+.footer-divider {
+  width: 100%;
+  margin: 15px 0;
+  border: 0.5px solid #555;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 12px;
+}
+
+.footer-bottom a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+.gallery-hero{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+  margin-top: 50px;
+  gap: 20px;
+  background-color: #a7a6a6;
+}
+.hero-text{
+  width: 50%;
+   max-width: 50%;
+  word-wrap: break-word;
+  overflow-wrap: break-word; 
+  h2{
+    font-size: 42px;
+   font-weight: bold;
+  }
+  p{
+    font-size: 16px;
+    color: #555;
+  }
+}
+
+.galleryimage{
+  width: 50%;
+  position: relative;
+}
+.main-image{
+  width: 100%;
+  position: relative;
+}
+
+.add-item-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.add-item-btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: block;
+}
+
+.add-item-btn:hover {
+  background-color: #0056b3;
+}
+
+
+.anotherheading{
+  width: auto;
+   max-width: auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word; 
+  h2{
+    font-size: 30px;
+   font-weight: bold;
+  }
+  p{
+    font-size: 16px;
+    color: #555;
+  }
+}

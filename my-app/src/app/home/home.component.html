@@ -1,0 +1,241 @@
+
+<!-- Display banners with image and content -->
+<div class="slider-container" data-aos="fade-down">
+  <div *ngFor="let banner of banners(); let i = index">
+    <div *ngIf="i === currentSlideIndex">
+      <div class="banner-image-container">
+        <!-- Show Edit Button only when isEditMode is true -->
+        <button *ngIf="isadmin"  class="edit-image-btn" (click)="editImage(banner)">
+          Update Image
+        </button>
+        <img [src]="banner.imageUrl" alt="Banner Image" class="banner-image" loading="lazy" />
+
+
+        <div class="image-content">
+          <div *ngIf="banner.isEditing">
+            <!-- Show Textarea Only in Edit Mode -->
+            <textarea *ngIf="isadmin" [(ngModel)]="banner.tempContent"></textarea>
+            <button *ngIf="isadmin" (click)="saveText(banner)">Save</button>
+          </div>
+
+          <div *ngIf="!banner.isEditing" (click)="editText(banner)">
+            <div class="banner-content">
+              {{ banner.content || 'No content available' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="showUploadForm && isadmin" class="upload-container">
+  <button class="close-btn" (click)="toggleUploadForm($event)">×</button> <!-- Close button -->
+  <h3>Upload Image</h3>
+  <form (ngSubmit)="updateImage()">
+    
+    <label for="itemId">Image Id</label>
+    <input type="number" id="itemId" [(ngModel)]="newImage.item_id" name="itemid" readonly required>
+    
+    <label for="userId">User Id</label>
+    <input type="number" id="userId" [(ngModel)]="newImage.userId" name="userid" required>
+
+    <label for="imageFile">Select Image</label>
+    <input type="file" id="imageFile" (change)="onImageFileChange($event)" required>
+
+    <button type="submit">Upload Image</button>
+  </form>
+</div>
+
+<div class="hero-container"  data-aos="fade-up" >
+  <div class="hero-content">
+    <!-- Editable Heading -->
+    <h1 id="heroTitle"
+        class="hero-title"
+        *ngIf="!isEditingHeading"
+        (click)="editField('Heading')">
+      {{ heading }}
+    </h1>
+    
+    <input *ngIf="isEditingHeading  && isadmin"
+           #headingInput
+           [(ngModel)]="heading"
+           type="text"
+           class="heading-input"
+           (blur)="updateContent(5,2)"  
+           
+           style="border: 2px solid blue; padding: 5px; font-size: 24px; width: 100%;" />
+           <!-- Use the (blur) event on the textbox to trigger a save operation. When the textbox loses focus (the user clicks outside of it), youll save the updated text to the database. -->
+  
+    <!-- Editable Text Content -->
+    <p id="heroDescription"
+       class="hero-description"
+       *ngIf="!isEditingTextcontent"
+       (click)="editField('Textcontent')">
+      {{ textcontent }}
+    </p>
+  
+    <input *ngIf="isEditingTextcontent"
+           #textInput
+           [(ngModel)]="textcontent"
+           type="text"
+           class="text-input"
+           (blur)="updateContent(5,2)"
+           style="border: 2px solid blue; padding: 5px; font-size: 18px; width: 100%;" />
+  
+    <div class="hero-form">
+      <button class="hero-button">Get Started</button>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <div class="circle">
+      <div class="center-icon">i</div>
+    </div>
+  </div>
+</div>
+
+<div class="design-section" data-aos="fade-up">
+  <div class="design-container">
+    
+    <!-- Left Side: Image -->
+    <div class="design-image">
+      <img src="assets/images/home.svg" alt="Design Image" loading="lazy">
+    </div>
+
+    <!-- Right Side: Editable Text Section -->
+    <div class="design-content">
+      <h1 id="designTitle"
+          class="design-title"
+          *ngIf="!isEditingDesignHeading"
+          (click)="editField('DesignHeading')">
+        {{ designHeading }}
+      </h1>
+
+      <input *ngIf="isEditingDesignHeading"
+             #designHeadingInput
+             [(ngModel)]="designHeading"
+             type="text"
+             class="design-heading-input"
+             (blur)="updateContent(6,4)" />
+
+      <h4 id="designDescription"
+          class="design-description"
+          *ngIf="!isEditingDesignTextcontent"
+          (click)="editField('DesignTextcontent')">
+        {{ designTextContent }}
+      </h4>
+
+      <input *ngIf="isEditingDesignTextcontent"
+             #designTextInput
+             [(ngModel)]="designTextContent"
+             type="text"
+             class="design-text-input"
+             (blur)="updateContent(6,4)" />
+    </div>
+
+  </div>
+</div>
+
+  
+    <div class="static-container">
+      <div class="static-content">
+        <h2 id="staticTitle"
+        class="static-title"
+        *ngIf="!isEditingStaticHeading"
+        (click)="editField('StaticHeading')">
+      {{ staticHeading }}
+  </h2>
+    
+    <input *ngIf="isEditingStaticHeading"
+           #staticHeadingInput
+           [(ngModel)]="staticHeading"
+           type="text"
+           class="static-heading-input"
+           (blur)="updateContent(7,4)"
+           style="border: 2px solid blue; padding: 5px; font-size: 20px; width: 100%;" />
+          
+        <p id="staticDescription"
+        class="static-description"
+        *ngIf = "!isEditingStaticTextcontent"
+        (click)= "editField('StaticTextcontent')">
+      {{staticTextContent}}
+    </p>
+    <input *ngIf = "isEditingStaticTextcontent"
+            #staticTextInput
+            [(ngModel)] = "staticTextContent"
+            type="text"
+            class="static-text-input"
+            (blur) = "updateContent(7,4)"
+            style = "border: 2px solid blue; padding: 5px; font-size: 18px; width: 100%;"/>
+      </div>
+    
+
+      <div class="image-container">
+        <div class="right-image">
+          <img [src]="rightimage" alt="Banner Image" class="static-image large" loading="lazy" />
+          <button class="edit-btn" *ngIf="isadmin" (click)="toggleupdateimage('right')">Update Right Image</button>
+        </div>
+
+        <div class="left-image">
+          <img [src]="leftimage" alt="Banner Image" class="static-image large" loading="lazy" />
+          <button class="edit-btn" *ngIf="isadmin" (click)="toggleupdateimage('left')">Update Left Image</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showUpdateForm" class="upload-container">
+      <button class="close-btn" (click)="toggleupdateimage()">×</button>
+      <h3>Update Background Image ({{ imageSide | titlecase }})</h3>
+      
+      <form (ngSubmit)="updateSingleImage()">
+        <label for="itemId">Image ID</label>
+        <input type="number" id="itemId" [(ngModel)]="newimage.item_id" name="itemid" readonly required>
+    
+        <label for="userId">User ID</label>
+        <input type="number" id="userId" [(ngModel)]="newimage.userId" name="userid" readonly required>
+    
+        <label for="pagename">Page Name</label>
+        <input type="text" id="pagename" [(ngModel)]="newimage.pagename" name="pagename" readonly required>
+    
+        <label for="imageFile">Select Image</label>
+        <input type="file" id="imageFile" (change)="imageSide ? onimageFileChange($event, imageSide) : null" required>
+    
+        <button type="submit">Update Image</button>
+      </form>
+    </div>
+    
+    <div class="trusted-companies" >
+      <div class="bottom-content">
+        <h2 id="bottomTitle"
+        class="bottom-title"
+        *ngIf="!isEditingBottomHeading"
+        (click)="editField('BottomHeading')">
+      {{ bottomHeading }}
+  </h2>
+    
+    <input *ngIf="isEditingBottomHeading"
+           #bottomHeadingInput
+           [(ngModel)]="bottomHeading"
+           type="text"
+           class="bottom-heading-input"
+           (blur)="updateContent(8,4)"
+           style="border: 2px solid blue; padding: 5px; font-size: 20px; width: 100%;" />
+          
+      
+      <div class="logo-container">
+        <span class="logo">Google</span>
+        <!-- <span class="logo bold">TaaS☁</span> -->
+        <span class="logo bold">Amazon</span>
+        <span class="logo">Flipcart</span>
+        <span class="logo bold">Microsoft</span>
+        <span class="logo">Apple</span>
+      </div>
+    
+      <p class="customer-stories">Make things easier with CMS</p>
+      <p class="customer-stories" style="font-weight: bold; color: rgb(38, 38, 133); font-size: 20px;">"Smooth control, Unique content.”</p>
+    </div>
+    </div>
+
+   

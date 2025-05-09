@@ -1,0 +1,254 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.bgimg {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  display: flex;
+  align-items: flex-end; 
+  justify-content: center; 
+  padding-bottom: 3%; 
+}
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 100%; /* Adjust this value to your container's preferred width */
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.about-heading
+ {
+  font-size: 2.5rem;
+  font-weight: bold;
+  word-wrap: break-word; 
+  word-break: break-word; 
+  max-width: 100%;
+  overflow-wrap: break-word; 
+  white-space: normal; 
+  color: rgb(66, 62, 62);
+}
+.about-text {
+  font-size: 2.5rem;
+  word-wrap: break-word; 
+  word-break: break-word; 
+  max-width: 100%;
+  overflow-wrap: break-word; 
+  white-space: normal; 
+  color: rgb(66, 62, 62);
+}
+.about-heading {
+  margin-bottom: 20px;
+}
+
+.about-text {
+  font-size: 1.2rem;
+  width: 80%;
+  line-height: 1.6;
+}
+
+.underline {
+  border-bottom: 2px dotted blue;
+}
+
+/* For the input fields */
+.heading-input,
+.text-input {
+  word-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%; /* Limits width */
+  box-sizing: border-box; /* Ensures padding and width are accounted for */
+  padding: 5px;
+  font-size: 24px;
+  width: 100%;
+  color: rgb(66, 62, 62);
+  
+}
+.moncao-editor{
+  color: black;
+}
+/* Ensuring content doesn't overflow in editable text */
+.about-text,
+.about-heading {
+  white-space: normal; /* Ensures content breaks into new lines when Enter is pressed */
+}
+
+
+/* General Page Styling */
+.about-section {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 60px;
+  margin-top: 50px;
+  text-align: left;
+  font-family: 'Arial', sans-serif;
+  color: #f9f9f9; /* Dark gray for better readability */
+  background-color: #7a7a7a;  /* Light grayish background */
+  padding: 20px;  /* Add padding for better spacing */
+  border-radius: 8px; /* Slight*/
+}
+
+/* About Title Styling */
+.about-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.highlight {
+  color: red;
+  text-decoration: underline;
+}
+
+/* About Content Section */
+.about-part {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  gap: 200px; /* Space between text and image */
+}
+
+/* About Text */
+.about-txt {
+  width: 95%; /* Takes less space */
+  font-size: 1.1rem;
+  line-height: 1.6;
+  word-wrap: break-word;
+  
+}
+
+/* About Image */
+.about-image {
+  width: 65%; /* Image takes full right side */
+  height: 500px;
+  position: relative;
+}
+
+.about-image img {
+  width: 80%;
+  height: 100%;
+  object-fit: cover; /* Ensures image covers full space */
+  border-radius: 8px;
+  position: relative;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+  .about-part {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-txt {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .about-image {
+    width: 100%;
+    height: auto;
+  }
+}
+
+
+.upload-container .close-btn {
+  position: absolute;
+  top: 5px; 
+  left: 125px; /* Position it at the right edge */
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: #888;
+  cursor: pointer;
+  z-index: 10000; /* Ensure it stays on top of other elements */
+}
+
+.upload-container .close-btn:hover {
+  color: black;
+}
+
+/* Rest of the CSS remains unchanged */
+.upload-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  color: rgb(66, 62, 62);
+  align-items: stretch;
+}
+
+.upload-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: rgb(66, 62, 62);
+}
+
+.upload-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  color: rgb(66, 62, 62);
+}
+
+.upload-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  position: absolute;
+  bottom: 10px;  /* Moves the button 10px from the bottom */
+  left: 10px;    
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-btn:hover {
+  background-color: #e0a800;
+}
+
+.main-image{
+  width: 100%;
+}

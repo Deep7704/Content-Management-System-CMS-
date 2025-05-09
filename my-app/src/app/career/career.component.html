@@ -1,0 +1,210 @@
+
+<!-- <img class="bgimg" src="https://img.freepik.com/premium-photo/image-background-wallpaper_573563-10517.jpg?semt=ais_hybrid" alt="No image"> -->
+<div class="image-container">
+  <!-- The background image is applied dynamically to the div using ngStyle -->
+  <div class="bgimg" *ngIf="showbgimg" [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')'}"></div>
+
+</div>
+
+<div class="career-hero">
+  <div class="career-text">
+    <h1
+    id="career-txt"
+    class="careertext"
+    *ngIf="!isEditingHeading"
+    (click)="editHeading()">
+    {{ heading }}
+  </h1>
+  
+  <ngx-monaco-editor
+    *ngIf="isEditingHeading"
+    class="heading-input"
+    [options]="editorOptions"
+    [(ngModel)]="heading"
+    (blur)="updateText()"
+    (onInit)="onMonacoInit($event)"
+    style="height: 60px; border: 2px solid blue; font-size: 20px;"
+  ></ngx-monaco-editor>
+  
+
+    <p id="textcontent"
+    class="text-content"
+    *ngIf="!isEditingTextcontent"
+    (click)="editTextContent()">
+   {{ textcontent }}
+  </p>
+
+ <input *ngIf="isEditingTextcontent"
+        #textInput
+        [(ngModel)]="textcontent"
+        type="text"
+        class="text-input"
+        (blur)="updateText()"
+        style="border: 2px solid blue; padding: 5px; font-size: 18px; width: 100%;" />
+
+    <div class="career-buttons">
+      <button class="btn-primary">Let's Grow with us</button>
+      <a href="/Career" class="btn-link">Learn More</a>
+    </div>
+  </div>
+
+  <div class="career-images">
+    <img [src]="imageurl || 'https://jthemes.net/themes/wp/jobbox/wp-content/uploads/2023/03/about-center.png'" 
+         class="main-image" 
+         alt="People">
+      
+    <button (click)="toggleupdateForm()" *ngIf="isadmin" class="update-btn" >Update Image</button>
+  </div>
+</div>
+
+<div *ngIf="showUpdateForm" class="upload-container" >
+  <button class="close-btn" (click)="toggleupdateForm()">×</button>
+  <h3>Upadte Background Image</h3>
+  <form (ngSubmit)="updateimage()">
+    
+    <label for="itemId">Image ID</label>
+    <input type="number" id="itemId" [(ngModel)]="newimage.item_id" name="itemid" readonly required>
+    
+    <label for="userId">User ID</label>
+    <input type="number" id="userId" [(ngModel)]="newimage.userId" name="userid" readonly required>
+
+    <label for="pagename">Page Name</label>
+    <input type="text" id="pagename" [(ngModel)]="newimage.pagename" name="pagename" readonly required>
+
+    <label for="imageFile">Select Image</label>
+    <input type="file" id="imageFile" (change)="onImageFileChange($event)" required>
+
+    <button type="submit">Update Image</button>
+  </form>
+</div>
+
+<div class="career-hiring">
+  <h3>WE ARE <span class="highlight">HIRING</span></h3>
+  <p>Let’s Work Together & Explore Opportunities</p>
+  <button class="btn-primary" (click)="scrollToResume()">Apply Now</button>
+
+</div>
+
+
+<div class="career-stats">
+  <div class="stat-box">
+    <h2>25 K+</h2>
+    <p>Completed Cases</p>
+    <span>We always provide people a complete solution for any business.</span>
+  </div>
+  <div class="stat-box">
+    <h2>17 +</h2>
+    <p>Our Office</p>
+    <span>We always provide people a complete solution for any business.</span>
+  </div>
+  <div class="stat-box">
+    <h2>86 +</h2>
+    <p>Skilled People</p>
+    <span>We always provide people a complete solution for any business.</span>
+  </div>
+  <div class="stat-box">
+    <h2>28 +</h2>
+    <p>Happy Clients</p>
+    <span>We always provide people a complete solution for any business.</span>
+  </div>
+</div>
+
+
+
+<div id="resumeSection" class="career-form-container">
+  <h2>Submit Your Resume</h2>
+  <form #resumeForm="ngForm" (ngSubmit)="submitForm(resumeForm)">
+    
+    <input type="text" [(ngModel)]="userId" name="userId" placeholder="User ID" required #userIdField="ngModel" />
+    <small *ngIf="userIdField.invalid && (userIdField.touched || formSubmitted)">User ID is required.</small>
+  
+    <input type="text" [(ngModel)]="firstName" name="firstName" placeholder="First Name" required minlength="2" pattern="^[a-zA-Z]+$" #firstNameField="ngModel" />
+    <small *ngIf="firstNameField.invalid && (firstNameField.touched || formSubmitted)">First name must contain at least two letters and no special characters.</small>
+  
+    <input type="text" [(ngModel)]="middleName" name="middleName" placeholder="Middle Name" pattern="^[a-zA-Z]+$" #middleNameField="ngModel" />
+    <small *ngIf="middleNameField.invalid && (middleNameField.touched || formSubmitted)">
+      Middle name must only contain letters.
+    </small>
+    
+    <input type="text" [(ngModel)]="lastName" name="lastName" placeholder="Last Name" required minlength="2" pattern="^[a-zA-Z]+$" #lastNameField="ngModel" />
+    <small *ngIf="lastNameField.invalid && (lastNameField.touched || formSubmitted)">
+      Last name must contain at least two letters and no special characters.
+    </small>
+    
+    <input type="text" [(ngModel)]="mobileNumber" name="mobileNumber" placeholder="Mobile Number" required pattern="^\+?\d{12,13}$" #mobileNumberField="ngModel" />
+    <small *ngIf="mobileNumberField.invalid && (mobileNumberField.touched || formSubmitted)">
+      Enter a valid mobile number (e.g., +911234567890).
+    </small>
+    
+    <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required #emailField="ngModel" />
+    <small *ngIf="emailField.invalid && (emailField.touched || formSubmitted)">
+      Enter a valid email address.
+    </small>
+
+    <input type="text" [(ngModel)]="location" name="location" placeholder="Location" required #locationField="ngModel" />
+ <small *ngIf="locationField.invalid && (locationField.touched || formSubmitted)">
+  Location is required.
+</small>
+
+    <label>Resume (PDF only):</label>
+    <input type="file" (change)="onFileSelected($event)" required />
+    <small *ngIf="resumeError" style="color: red;">{{ resumeError }}</small>
+  
+    <button type="submit">Submit</button>
+  </form>
+  
+</div>
+<!-- 
+<footer class="footer" *ngIf="footerData">
+  <div class="footer-container">
+    <div class="footer-left">
+      <h2 class="footer-title">{{ footerData.websiteTitle }}</h2>
+      <nav class="footer-links">
+        <a href="#">Home</a> |
+        <a href="#">About</a> |
+        <a href="#">Gallery</a> |
+        <a href="#">Careers</a> |
+        <a href="#">Contact Us</a>
+      </nav>
+    </div>
+
+    <div class="footer-right">
+      <span class="footer-email">Email📧  
+        <strong>{{ footerData.email }}</strong>
+      </span>
+
+      <div class="footer-follow-section">
+        <span class="footer-follow">Follow On</span>
+        <div class="footer-icons">
+          <a *ngIf="footerData.socialLinks.twitter" [href]="footerData.socialLinks.twitter" target="_blank">
+            <ion-icon class="social-icon" name="logo-twitter"></ion-icon>
+          </a>
+          <a *ngIf="footerData.socialLinks.facebook" [href]="footerData.socialLinks.facebook" target="_blank">
+            <ion-icon class="social-icon" name="logo-facebook"></ion-icon>
+          </a>
+          <a *ngIf="footerData.socialLinks.instagram" [href]="footerData.socialLinks.instagram" target="_blank">
+            <ion-icon class="social-icon" name="logo-instagram"></ion-icon>
+          </a>
+          <a *ngIf="footerData.socialLinks.linkedin" [href]="footerData.socialLinks.linkedin" target="_blank">
+            <ion-icon class="social-icon" name="logo-linkedin"></ion-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="footer-divider">
+
+  <div class="footer-bottom">
+    <p>
+      {{ footerData.copyrightText }} |
+      <a *ngIf="footerData.footerLinks.legal" [href]="footerData.footerLinks.legal.url">
+        {{ footerData.footerLinks.legal.text }}
+      </a> | 
+      <a *ngIf="footerData.footerLinks.privacy" [href]="footerData.footerLinks.privacy.url">
+        {{ footerData.footerLinks.privacy.text }}
+      </a> | 
+      <a href="#">Website Terms of Use</a>
+    </p>
+  </div>
+</footer> -->
