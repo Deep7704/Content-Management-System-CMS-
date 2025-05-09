@@ -1,0 +1,6 @@
+@CMS_Register_HostAddress = http://localhost:5264
+
+GET {{CMS_Register_HostAddress}}/CmsContext/
+Accept: application/json
+
+###
